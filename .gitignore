@@ -8,8 +8,8 @@
 /.bundle
 
 
-/.id_shh
-/.id_shh.pub
+/id_shh
+/id_shh.pub
 # Ignore all environment files (except templates).
 /.env*
 !/.env*.erb
