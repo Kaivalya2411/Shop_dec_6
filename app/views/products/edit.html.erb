@@ -1,0 +1,24 @@
+<!--<div style="width: 50%; margin: 0 auto; padding: 20px;">-->
+<!--  <h1>Editing product</h1>-->
+  <%#= render "form", product: @product %>
+<!--  <br>-->
+<!--  <div>-->
+<!--    <%#= link_to "Show this product", @product %> |-->
+    <%#= link_to "Back to products", products_path %>
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="container mt-5" style="background-color: #70a0d0; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+  <div class="row justify-content-center">
+    <div class="col-md-8 p-4">
+      <h1 class="text-center mb-4" style="color: #343a40;">Editing Product</h1>
+      <%= render "form", product: @product %>
+      <br>
+      <div class="text-center">
+        <%= link_to "Show this product", @product, class: "btn btn-secondary me-2" %>
+        <%= link_to "Back to products", products_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

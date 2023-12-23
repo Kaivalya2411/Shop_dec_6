@@ -1,0 +1,59 @@
+<%= turbo_frame_tag "cart" do %>
+  <% if current_user %>
+
+    <% if logged_in?(:site_admin) %>
+      <hr>
+      <p>Hello Admin, Welcome Back! </p>
+      <hr>
+    <% else %>
+      <hr>
+      <p>Hello, <%= current_user.email %></p>
+      <hr>
+<!--      <div id="cart-container">-->
+<!--          <h1>Your Cart:</h1>-->
+          <%# if @cart.orderables.count > 0 %>
+            <%#= render "cart/orderables" %>
+<!--            <p>Total: <%#= @cart.total %></p>-->
+
+<!--              <script async-->
+<!--                      src="https://js.stripe.com/v3/buy-button.js">-->
+<!--              </script>-->
+
+<!--              <stripe-buy-button-->
+<!--                buy-button-id="buy_btn_1ON9cLEe6qqIjra8aZDaSDPV"-->
+<!--                publishable-key="pk_test_51OLgmfEe6qqIjra8GLQXFwPOr8hpUCO1XmZyPY4V0nzbRXKD7nWV2QECT3c4dMn6aZXGHJrIgCHorsuEwlUezK9e00qsTQQZ6h"-->
+<!--              >-->
+<!--              </stripe-buy-button>-->
+<!--          </div>-->
+      <div id="cart-container" class="container mt-4">
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <h1 class="display-4 text-primary mb-4">Your Cart:</h1>
+
+            <% if @cart.orderables.count > 0 %>
+              <%= render "cart/orderables" %>
+              <p class="lead">Total: <%= @cart.total %></p>
+
+              <div class="text-center">
+                <script async
+                        src="https://js.stripe.com/v3/buy-button.js">
+                </script>
+
+                <stripe-buy-button
+                  buy-button-id="buy_btn_1ON9cLEe6qqIjra8aZDaSDPV"
+                  publishable-key="pk_test_51OLgmfEe6qqIjra8GLQXFwPOr8hpUCO1XmZyPY4V0nzbRXKD7nWV2QECT3c4dMn6aZXGHJrIgCHorsuEwlUezK9e00qsTQQZ6h"
+                >
+                </stripe-buy-button>
+              </div>
+            <% else %>
+              <p class="lead">Your cart is empty.</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+<% end %>
+
+<% end %>

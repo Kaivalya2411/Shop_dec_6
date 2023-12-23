@@ -1,0 +1,43 @@
+<!--<div class="alert alert-primary" role="alert">-->
+  <%#= notice %>
+<!--</div>-->
+
+<%# if user_signed_in? %>
+<!--  <h1>Products: </h1>-->
+<!--<div id="products">-->
+  <%# @products.each do |product| %>
+    <%#= render product %>
+<!--    <p>-->
+      <%# if logged_in?(:site_admin) %>
+      <%#= link_to "Show this product", product %>
+      <%# end %>
+<!--    </p>-->
+  <%# end %>
+<!--</div>-->
+  <%#= link_to "New product", new_product_path if logged_in?(:site_admin) %>
+<%# end %>
+
+
+<div class="container mt-4">
+  <div class="alert alert-primary" role="alert">
+    <%= notice %>
+  </div>
+
+  <% if user_signed_in? %>
+    <h1 class="mb-4">Products</h1>
+    <div class="row" id="products">
+      <% @products.each do |product| %>
+        <div class="col-md-4 mb-4">
+          <%= render product %>
+          <p class="text-center mt-2">
+            <% if logged_in?(:site_admin) %>
+              <%= link_to "Show this product", product, class: "btn btn-outline-primary" %>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <%= link_to "New product", new_product_path, class: "btn btn-primary" if logged_in?(:site_admin) %>
+  <% end %>
+</div>

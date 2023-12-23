@@ -1,0 +1,118 @@
+<div id="<%= dom_id product %>" class="mb-4">
+  <div style="display:flex;justify-content:space-between;margin: 0 5em;">
+    <div class="col-md-30">
+      <div class="card">
+        <div id="carousel<%= dom_id product %>" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <% if product.thumbnail.attached? %>
+              <div class="carousel-item active">
+                <%= image_tag product.thumbnail.variant(:thumb), class: "d-block w-100" %>
+              </div>
+            <% end %>
+
+            <% if product.file.attached? %>
+              <% if product.file.video? %>
+                <div class="carousel-item">
+                  <%= video_tag url_for(product.file), controls: '', class: "d-block w-100" %>
+                </div>
+              <% elsif product.file.previewable? %>
+                <div class="carousel-item">
+                  <%= image_tag product.file.variant(resize_to_fit: [600, 400]), class: "d-block w-100" %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel<%= dom_id product %>" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel<%= dom_id product %>" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+
+        <div class="card" style="width: 18rem; height: 300px;">
+          <!-- ... other card elements ... -->
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= product.desc %></p>
+            <p class="card-text">$<%= product.price %></p>
+            <p class="card-text">Expiry Date: <%= product.dates %></p>
+          </div>
+        </div>
+
+<!--        <div class="card-body">-->
+<!--          <h5 class="card-title"><%#= product.name %></h5>-->
+<!--          <p class="card-text"><%#= product.desc %></p>-->
+
+<!--          <p class="card-text">$<%#= product.price %></p>-->
+<!--          <p class="card-text">Expiry Date: <%#= product.dates %></p>-->
+<!--        </div>-->
+      </div>
+    </div>
+    <% if logged_in?(:site_admin) %>
+      <hr>
+    <% else %>
+      <%= form_with(url: cart_add_path, class: "ms-2") do |f| %>
+        <%= f.hidden_field :id, value: product.id %>
+        <%= f.number_field :quantity, value: 0, min: 1, class: "form-control" %>
+        <%= f.submit "Add To Cart", class: "btn btn-primary mt-2" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!--#old code-->
+
+<!--<div id="<%#= dom_id product %>">-->
+<!--  <div style="display:flex;justify-content:space-between;margin: 0em 5em;">-->
+<!--    <div class="col-md-4 mb-4">-->
+<!--      <div class="card">-->
+<!--        <div class="card-body">-->
+<!--          <h5 class="card-title"><%#= product.name %></h5>-->
+<!--          <p class="card-text"><%#= product.desc %></p>-->
+
+<!--          <div>-->
+            <%# if product.thumbnail.attached? %>
+              <%#= image_tag product.thumbnail.variant(:thumb) %>
+            <%# end %>
+<!--          </div>-->
+<!--          <div>-->
+            <%# if product.file.attached? %>
+              <%# if product.file.video? %>
+                <%#= video_tag url_for(product.file), controls: '', width: 200, height: 150  %>
+              <%# elsif product.file.previewable? %>
+<!--                <div style='height: 100px; width: 100px'>-->
+                  <%#= image_tag product.file.varient(resize_to_fit: [100, 100]) %>
+<!--                </div>-->
+              <%# end %>
+            <%# end %>
+<!--          </div>-->
+
+<!--          <p class="card-text">$<%#= product.price %></p>-->
+<!--          <p class="cart-text">Expiry Date: <%#= product.dates %></p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <%# if logged_in?(:site_admin) %>
+<!--      <hr>-->
+    <%# else %>
+      <%#= form_with(url: cart_add_path) do |f| %>
+        <%#= f.hidden_field :id, value: product.id %>
+        <%#= f.number_field :quantity, value: 0, min: 1 %>
+        <%#= f.submit "Add To Cart" %>
+      <%# end %>
+    <%# end %>
+<!--  </div>-->
+<!--</div>-->
+
+<%#= button_to "Buy It!", new_product_purchase_path(product) %>
+

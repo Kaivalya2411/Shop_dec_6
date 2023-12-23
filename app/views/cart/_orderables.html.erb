@@ -1,0 +1,53 @@
+<%# @cart.orderables.each do |orderable| %>
+  <%# product = orderable.product %>
+<!--  <div id="<%#= "cart-#{product.id}" %>">-->
+<!--    <div style="display:flex;justify-content:space-between;margin: 0em 5em;">-->
+<!--      <strong>Name:</strong>-->
+      <%#= product.name %>
+<!--      <strong>Description:</strong>-->
+      <%#= product.desc %>
+<!--      <strong>Price:</strong>-->
+      <%#= product.price %>
+
+<!--      <div class="form-group">-->
+      <%#= form_with(url: cart_add_path, remote: true, data:  {type: :html}) do |f| %>
+        <%#= f.hidden_field :id, value: product.id %>
+        <%#= f.number_field :quantity, value: orderable.quantity, min: 0 %>
+        <%#= f.submit "Add To Cart" %>
+      <%# end %>
+      <%#= form_with(url: cart_remove_path) do |f| %>
+        <%#= f.hidden_field :id, value: orderable.id %>
+        <%#= f.submit "Remove" %>
+      <%# end %>
+<!--      </div>-->
+<!--      <strong>Total:</strong>-->
+      <%#= orderable.total %>
+<!--    </div>-->
+<!--  </div>-->
+<%# end %>
+
+<% @cart.orderables.each do |orderable| %>
+  <% product = orderable.product %>
+  <div id="<%= "cart-#{product.id}" %>" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= product.name %></h5>
+      <p class="card-text"><%= product.desc %></p>
+      <p class="card-text"><strong>Price:</strong> $<%= product.price %></p>
+
+      <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-center">
+        <%= form_with(url: cart_add_path, remote: true, data: { type: :html }, class: "mb-2 mb-md-0 me-md-2") do |f| %>
+          <%= f.hidden_field :id, value: product.id %>
+          <%= f.number_field :quantity, value: orderable.quantity, min: 0, class: "form-control me-2" %>
+          <%= f.submit "Update", class: "btn btn-primary mt-2 mt-md-3" %>
+        <% end %>
+
+        <%= form_with(url: cart_remove_path) do |f| %>
+          <%= f.hidden_field :id, value: orderable.id %>
+          <%= f.submit "Remove", class: "btn btn-danger mt-2 mt-md-0" %>
+        <% end %>
+
+<!--        <p class="lead mt-2 mt-md-4"><strong>Total:</strong> <%#= orderable.total %></p>-->
+      </div>
+    </div>
+  </div>
+<% end %>

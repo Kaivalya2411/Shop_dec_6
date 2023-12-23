@@ -1,0 +1,97 @@
+<%#= form_with(model: product) do |form| %>
+  <%# if product.errors.any? %>
+<!--    <div style="color: red">-->
+<!--      <h2><%#= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>-->
+
+<!--      <ul>-->
+        <%# product.errors.each do |error| %>
+<!--          <li><%#= error.full_message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+
+<!--  <div>-->
+    <%#= form.label :name, style: "display: block" %>
+    <%#= form.text_field :name %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :desc, style: "display: block" %>
+    <%#= form.text_area :desc %>
+<!--  </div>-->
+
+<!--  <div class="form-group mt-2">-->
+    <%#= form.label :thumbnail, style: "display: block" %>
+    <%#= form.file_field :thumbnail, class: "form-control" %>
+<!--  </div>-->
+
+<!--  <div class="form-group mt-2">-->
+    <%#= form.label :file, style: "display: block" %>
+    <%#= form.file_field :file, class: "form-control" %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :price, style: "display: block" %>
+    <%#= form.text_field :price %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.label :dates, style: "display: block" %>
+    <%#= form.date_field :dates %>
+<!--  </div>-->
+
+<!--  <div>-->
+    <%#= form.submit %>
+<!--  </div>-->
+<%# end %>
+
+<div style="width: 50%; margin: 0 auto; padding: 20px;">
+  <%= form_with(model: product, class: "needs-validation", novalidate: true) do |form| %>
+    <% if product.errors.any? %>
+      <div class="alert alert-danger">
+        <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+        <ul>
+          <% product.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :desc, class: "form-label" %>
+      <%= form.text_area :desc, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :thumbnail, class: "form-label" %>
+      <%= form.file_field :thumbnail, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :file, class: "form-label" %>
+      <%= form.file_field :file, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :price, class: "form-label" %>
+      <%= form.text_field :price, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :dates, class: "form-label" %>
+      <%= form.date_field :dates, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.submit "Save Product", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
